@@ -5,6 +5,8 @@ import { Note } from "../types/note";
 interface NoteContextProps {
   notes: Note[];
   createNote: (note: Omit<Note, "id">) => void;
+  updateNote: (note: Note) => void;
+  deleteNote: (id: number) => void
 }
 
 export const NoteContext = createContext<NoteContextProps>(null as any);
@@ -23,6 +25,7 @@ export function NoteContextProvider({ children }: NoteContextProviderProps) {
         id: notes.length,
         title: note.title,
         description: note.description,
+        color: note.color,
         creationDate: new Date().toLocaleDateString("en-US", {
           year: "numeric",
           month: "long",
@@ -31,13 +34,23 @@ export function NoteContextProvider({ children }: NoteContextProviderProps) {
         creationTime: new Date().toLocaleTimeString("en-US", {
           hour: "2-digit",
           minute: "2-digit",
-          hour12: true,
+          hour12: false,
         }),
         creationDay: new Date().toLocaleDateString("en-US", {
           weekday: "long",
         }),
       },
     ]);
+  }
+
+  function updateNote(updatedNote: Note) {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) => (note.id === updatedNote.id ? updatedNote : note))
+    );
+  }
+
+  function deleteNote(id: number) {
+    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
   }
 
   useEffect(() => {
@@ -49,6 +62,8 @@ export function NoteContextProvider({ children }: NoteContextProviderProps) {
       value={{
         notes,
         createNote,
+        updateNote,
+        deleteNote,
       }}
     >
       {children}

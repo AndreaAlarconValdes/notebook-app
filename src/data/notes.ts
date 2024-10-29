@@ -1,11 +1,14 @@
-export const notes = [
+import { Note, NoteColors } from "../types/note";
+
+export const notes: Note[] = [
   {
     id: 0,
     title: "Try me",
     description:
       "Try adding your own note, choosing the colour, editing and deleting it.",
-    creationDate: "October 29, 2024",
-    creationTime: "10:46 AM",
+    color: NoteColors.orange,
+    creationDate: "October 28, 2024",
+    creationTime: "21:30",
     creationDay: "Tuesday",
   },
   {
@@ -13,8 +16,9 @@ export const notes = [
     title: "GitHub",
     description:
       "This is a personal project to practice and improve my skills. You can find the code on my GitHub @AndreaAlarconValdes",
-    creationDate: "October 29, 2024",
-    creationTime: "11:11 AM",
+    creationDate: "October 28, 2024",
+    creationTime: "15:21",
+    color: NoteColors.green ,
     creationDay: "Tuesday",
   },
   {
@@ -22,8 +26,9 @@ export const notes = [
     title: "Contact me",
     description:
       "You can contact me through my email address alarconvaldes.a@gmail.com or through Linkedin @andreaalarconvaldes",
-    creationDate: "October 29, 2024",
-    creationTime: "10:30 PM",
+    creationDate: "October 28, 2024",
+    creationTime: "11:04",
+    color: NoteColors.salmon,
     creationDay: "Tuesday",
   },
 ];
