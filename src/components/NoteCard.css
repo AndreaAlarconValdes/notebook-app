@@ -1,0 +1,50 @@
+.card-container {
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #facf7c;
+  width: 250px;
+}
+
+.creation-date {
+  font-size: 14px;
+  color: #474747;
+  margin: 0;
+}
+
+.title-section {
+  border-bottom: 1px solid rgba(35, 35, 35, 0.204);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(50, 50, 50);
+}
+
+.description {
+  color: rgb(69, 69, 69);
+  min-height: 150px;
+
+}
+
+.footer-date {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .creation-time{
+    font-size: 14px;
+    color: #474747;
+  }
+
+  .card-container span{
+    font-size: 20px;
+  }

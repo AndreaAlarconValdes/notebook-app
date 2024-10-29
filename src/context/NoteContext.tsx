@@ -2,8 +2,6 @@ import { createContext, useState, useEffect, ReactNode } from "react";
 import { notes as data } from "../data/notes";
 import { Note } from "../types/note";
 
-
-
 interface NoteContextProps {
   notes: Note[];
   createNote: (note: Omit<Note, "id">) => void;
@@ -25,6 +23,19 @@ export function NoteContextProvider({ children }: NoteContextProviderProps) {
         id: notes.length,
         title: note.title,
         description: note.description,
+        creationDate: new Date().toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }),
+        creationTime: new Date().toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        }),
+        creationDay: new Date().toLocaleDateString("en-US", {
+          weekday: "long",
+        }),
       },
     ]);
   }

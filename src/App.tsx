@@ -1,5 +1,5 @@
+import { NoteBoard } from "./components/NoteBoard"
 import { NoteForm } from "./components/NoteForm"
-import NoteList from "./components/NoteList"
 import { NoteContextProvider } from "./context/NoteContext"
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
   return (
     <NoteContextProvider>
       <NoteForm/>
-      <NoteList/>
+      <NoteBoard/>
     </NoteContextProvider>
   )
 }

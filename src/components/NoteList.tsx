@@ -1,3 +1,4 @@
+import "./NoteList.css"
 import { useContext } from "react";
 import { NoteContext } from "../context/NoteContext";
 import { NoteCard } from "./NoteCard";
@@ -10,9 +11,9 @@ export function NoteList() {
   }
 
   return (
-    <div>
+    <div className="note-list-container">
       {notes.map((note) => (
-        <NoteCard id={note.id} title={note.title} description={note.description} />
+        <NoteCard id={note.id} title={note.title} description={note.description} creationDate={note.creationDate} creationTime={note.creationTime} creationDay={note.creationDay}/>
       ))}
     </div>
   );
