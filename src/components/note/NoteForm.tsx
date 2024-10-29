@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { NoteContext } from "../context/NoteContext";
+import { NoteContext } from "../../context/NoteContext";
 
 export const NoteForm: React.FC = ({}) => {
   const [title, setTitle] = useState("");

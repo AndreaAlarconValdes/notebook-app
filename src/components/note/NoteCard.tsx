@@ -1,5 +1,5 @@
 import "./NoteCard.css";
-import { Note } from "../types/note";
+import { Note } from "../../types/note";
 
 export const NoteCard: React.FC<Note> = ({
   title,

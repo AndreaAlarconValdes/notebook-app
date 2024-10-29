@@ -1,6 +1,6 @@
 import "./NoteList.css"
 import { useContext } from "react";
-import { NoteContext } from "../context/NoteContext";
+import { NoteContext } from "../../context/NoteContext";
 import { NoteCard } from "./NoteCard";
 
 export function NoteList() {

@@ -1,0 +1,19 @@
+.notes-section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.add-note-button {
+  padding: 20px;
+  cursor: pointer;
+  border: 1px dashed gray;
+  border-radius: 10px;
+  background-color: rgba(193, 193, 193, 0.13);
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
