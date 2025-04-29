@@ -6,6 +6,7 @@ export interface Note {
   creationTime: string;
   creationDay: string;
   color: NoteColors;
+  timestamp?: number;
 }
 
 export enum NoteColors {

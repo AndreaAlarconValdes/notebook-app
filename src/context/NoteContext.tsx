@@ -18,28 +18,33 @@ interface NoteContextProviderProps {
 export function NoteContextProvider({ children }: NoteContextProviderProps) {
   const [notes, setNotes] = useState<Note[]>([]);
 
-  function createNote(note: Omit<Note, "id">) {
-    setNotes([
-      ...notes,
+  function createNote(note: Omit<Note, "id" | "creationDate" | "creationTime" | "creationDay" | "timestamp">) {
+    const now = new Date();
+    const timestamp = now.getTime();
+  
+    setNotes((prevNotes) => [
       {
-        id: notes.length,
+        id: prevNotes.length > 0 ? Math.max(...prevNotes.map(n => n.id)) + 1 : 0,
         title: note.title,
         description: note.description,
         color: note.color,
-        creationDate: new Date().toLocaleDateString("en-US", {
+        creationDate: now.toLocaleDateString("en-US", {
           year: "numeric",
           month: "long",
           day: "numeric",
         }),
-        creationTime: new Date().toLocaleTimeString("en-US", {
+        creationTime: now.toLocaleTimeString("en-US", {
           hour: "2-digit",
           minute: "2-digit",
+          second: "2-digit", // importante
           hour12: false,
         }),
-        creationDay: new Date().toLocaleDateString("en-US", {
+        creationDay: now.toLocaleDateString("en-US", {
           weekday: "long",
         }),
+        timestamp, // nuevo campo
       },
+      ...prevNotes // insertamos al inicio
     ]);
   }
 

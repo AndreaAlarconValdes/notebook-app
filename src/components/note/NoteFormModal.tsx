@@ -13,8 +13,15 @@ export function NoteFormModal({ closeModal, note = null }: NoteFormModalProps) {
   const [creationDate, setCreationDate] = useState("");
   const [creationTime, setCreationTime] = useState("");
   const [creationDay, setCreationDay] = useState("");
-  const [color, setColor] = useState<NoteColors>(NoteColors.green)
+  const [color, setColor] = useState<NoteColors>(NoteColors.green);
   const { createNote, updateNote, deleteNote } = useContext(NoteContext);
+
+  const [isVisible, setIsVisible] = useState(false);
+  const [isShrinking, setIsShrinking] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsVisible(true), 10); // activa la animación
+  }, []);
 
   useEffect(() => {
     if (note) {
@@ -40,38 +47,54 @@ export function NoteFormModal({ closeModal, note = null }: NoteFormModalProps) {
       alert("This field cannot be empty");
       return;
     }
-    if (note) {
-      updateNote({
-        ...note,
-        title,
-        description,
-        color,
-        creationDate,
-        creationTime,
-        creationDay,
-      });
-    } else {
-      createNote({
-        title,
-        description,
-        color,
-        creationDate,
-        creationTime,
-        creationDay,
-      });
-    }
 
-    setTitle("");
-    setDescription("");
-    setCreationDate("");
-    setCreationTime("");
-    setCreationDay("");
-    closeModal();
+    setIsShrinking(true);
+    setTimeout(() => {
+      if (note) {
+        updateNote({
+          ...note,
+          title,
+          description,
+          color,
+          creationDate,
+          creationTime,
+          creationDay,
+        });
+      } else {
+        createNote({
+          title,
+          description,
+          color,
+          creationDate,
+          creationTime,
+          creationDay,
+        });
+      }
+      setTitle("");
+      setDescription("");
+      setCreationDate("");
+      setCreationTime("");
+      setCreationDay("");
+      closeModal();
+    }, 400);
   };
+
+  //   setTitle("");
+  //   setDescription("");
+  //   setCreationDate("");
+  //   setCreationTime("");
+  //   setCreationDay("");
+  //   closeModal();
+  // }
 
   return (
     <div className="modal-overlay">
-      <form className="form" onSubmit={handleSubmit}>
+      <form
+        className={`form ${isVisible ? "show" : ""} ${
+          isShrinking ? "shrink-out" : ""
+        }`}
+        onSubmit={handleSubmit}
+      >
         <span
           className="material-symbols-outlined close-button"
           onClick={closeModal}
@@ -99,17 +122,16 @@ export function NoteFormModal({ closeModal, note = null }: NoteFormModalProps) {
           }
           value={description}
         ></textarea>
-          <p>Pick a color</p>
+        <p>Pick a color</p>
         <div className="color-buttons">
           {Object.values(NoteColors).map((colorValue) => (
             <button
               key={colorValue}
               type="button"
-              className={`color-button ${color === colorValue ? 'active' : ''}`}
+              className={`color-button ${color === colorValue ? "active" : ""}`}
               style={{ backgroundColor: colorValue }}
               onClick={() => setColor(colorValue as NoteColors)}
-            >
-            </button>
+            ></button>
           ))}
         </div>
         {note && (

@@ -15,25 +15,28 @@ export function NoteBoard() {
   };
 
   return (
-    <div className="note-board-container">
-      <h1>My Notes</h1>
-      <div className="notes-section">
-      <NoteList />
-      <button className="add-note-button" onClick={openModal}>
-        <span
-          className="material-symbols-outlined"
-          style={{
-            backgroundColor: "black",
-            color: "white",
-            borderRadius: "999px",
-          }}
-        >
-          add
-        </span>
-        New Note
-      </button>
+    <>
+      <div className="notes-page">
+        <div className="button-section">
+          <button onClick={openModal}>
+            <span
+              className="material-symbols-outlined"
+              style={{
+                backgroundColor: "black",
+                color: "white",
+                borderRadius: "999px",
+              }}
+            >
+              add
+            </span>
+            New Note
+          </button>
+        </div>
+        <div className="notes-container">
+          <NoteList />
+        </div>
       </div>
       {isModalOpen && <NoteFormModal closeModal={closeModal} />}
-    </div>
+    </>
   );
 }

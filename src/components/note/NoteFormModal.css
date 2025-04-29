@@ -17,7 +17,22 @@
   display: flex;
   flex-direction: column;
   padding: 2rem;
+  transform: scale(0.6);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
+.form.show {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.form.shrink-out {
+  transform: scale(0.3) translate(300px, 300px);
+  opacity: 0;
+  transition: transform 0.4s ease-in, opacity 0.3s ease-in;
+}
+
 .form .close-button {
   text-align: right;
   cursor: pointer;
