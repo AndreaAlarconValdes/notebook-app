@@ -29,22 +29,20 @@ export function NoteContextProvider({ children }: NoteContextProviderProps) {
         description: note.description,
         color: note.color,
         creationDate: now.toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
           day: "numeric",
+          month: "long",
         }),
         creationTime: now.toLocaleTimeString("en-US", {
           hour: "2-digit",
           minute: "2-digit",
-          second: "2-digit", // importante
           hour12: false,
         }),
         creationDay: now.toLocaleDateString("en-US", {
-          weekday: "long",
+          weekday: "short",
         }),
-        timestamp, // nuevo campo
+        timestamp, 
       },
-      ...prevNotes // insertamos al inicio
+      ...prevNotes 
     ]);
   }
 

@@ -1,23 +1,22 @@
 .notes-page {
-  width: 100vw;
   height: 100vh;
+  background-size: 20px 20px;
+  background-image: repeating-linear-gradient(
+    0deg,
+    #e8e8e8,
+    #e8e8e8 1px,
+    #fafafa 1px,
+    #fafafa
+  );
+}
+
+.button-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  margin: 1rem 0;
-}
-.notes-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  justify-items: center;
-  gap: 2rem;
-}
-.button-section {
-  width: 10vw;
-  display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
+  padding: 2rem;
 }
 
 .button-section button {
@@ -32,10 +31,24 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 .button-section button:hover {
   scale: 1.1;
+}
+
+.notes-container {
+  min-height: 100vh;
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  gap: 2rem;
+  border: 3px solid black;
+  padding: 3rem 2rem;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  border-bottom: none;
 }
 
 @media (max-width: 1400px) {
@@ -48,12 +61,10 @@
   .notes-container {
     grid-template-columns: repeat(2, 1fr);
   }
-
 }
 
 @media (max-width: 650px) {
   .notes-container {
     grid-template-columns: repeat(1, 1fr);
   }
-
 }

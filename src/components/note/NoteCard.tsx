@@ -21,7 +21,7 @@ export const NoteCard: React.FC<Note> = ({
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  
+
   const note = {
     id,
     title,
@@ -34,33 +34,33 @@ export const NoteCard: React.FC<Note> = ({
 
   return (
     <>
-    <div className="card-container" style={{backgroundColor: color}}>
-      <p className="creation-date">{creationDate}</p>
-      <section className="title-section">
-        <h1 className="title">{title}</h1>
-        <span
-        onClick={openModal}
-          className="material-symbols-outlined"
-          style={{
-            backgroundColor: "black",
-            color: color,
-            borderRadius: "999px",
-            padding: "3px",
-            cursor: "pointer",
-          }}
-        >
-          edit
-        </span>
-      </section>
-      <p className="description">{description}</p>
-      <div className="footer-date">
-        <span className="material-symbols-outlined">timer</span>
-        <p className="creation-time">
-          {creationTime}, {creationDay}
-        </p>
+      <div
+        className="card-container"
+        style={{
+          backgroundImage: `repeating-linear-gradient(0deg, #fafafa, #fafafa 1px, ${color} 1px, ${color})`,
+        }}
+      >
+        <div className="content-section">
+          <h1>{title}</h1>
+          <p>{description}</p>
+        </div>
+        <div className="footer">
+          <div className="date">
+            <span className="material-symbols-outlined">timer</span>
+            <p className="creation-time">
+              {creationDay} {creationDate}, {creationTime}
+            </p>
+          </div>
+          <span
+            onClick={openModal}
+            className="material-symbols-outlined edit-btn"
+            
+          >
+            edit
+          </span>
+        </div>
       </div>
-    </div>
-    {isModalOpen && <NoteFormModal  closeModal={closeModal} note={note} />}
+      {isModalOpen && <NoteFormModal closeModal={closeModal} note={note} />}
     </>
   );
 };

@@ -18,6 +18,7 @@ export function NoteBoard() {
     <>
       <div className="notes-page">
         <div className="button-section">
+          <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. </h2>
           <button onClick={openModal}>
             <span
               className="material-symbols-outlined"
