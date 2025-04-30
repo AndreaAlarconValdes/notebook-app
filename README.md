@@ -1,4 +1,4 @@
-# Notes website
+# ALL IN ORDER, ALL IN NOTES.
 
 This is a web project of a notes application where users can create, edit and delete notes. It is built with React and TypeScript using the Vite rapid development environment. The project is designed to practice modern React development tools, state handling, and integration with TypeScript for a more robust development experience.
 
