@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
 import { notes as data } from "../data/notes";
-import { Note } from "../types/note";
+import { CategoryColors, Note } from "../types/note";
 
 interface NoteContextProps {
   notes: Note[];
@@ -18,16 +18,18 @@ interface NoteContextProviderProps {
 export function NoteContextProvider({ children }: NoteContextProviderProps) {
   const [notes, setNotes] = useState<Note[]>([]);
 
-  function createNote(note: Omit<Note, "id" | "creationDate" | "creationTime" | "creationDay" | "timestamp">) {
+  function createNote(note: Omit<Note, "id" | "creationDate" | "creationTime" | "creationDay" | "timestamp"| "color">) {
     const now = new Date();
     const timestamp = now.getTime();
-  
+    const color = CategoryColors[note.category];
+    
     setNotes((prevNotes) => [
       {
         id: prevNotes.length > 0 ? Math.max(...prevNotes.map(n => n.id)) + 1 : 0,
         title: note.title,
         description: note.description,
-        color: note.color,
+        color,
+        category: note.category, 
         creationDate: now.toLocaleDateString("en-US", {
           day: "numeric",
           month: "long",
@@ -40,11 +42,12 @@ export function NoteContextProvider({ children }: NoteContextProviderProps) {
         creationDay: now.toLocaleDateString("en-US", {
           weekday: "short",
         }),
-        timestamp, 
+        timestamp,
       },
-      ...prevNotes 
+      ...prevNotes
     ]);
   }
+  
 
   function updateNote(updatedNote: Note) {
     setNotes((prevNotes) =>

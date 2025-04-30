@@ -8,6 +8,7 @@ export const NoteCard: React.FC<Note> = ({
   title,
   description,
   color,
+  category,
   creationDate,
   creationTime,
   creationDay,
@@ -27,6 +28,7 @@ export const NoteCard: React.FC<Note> = ({
     title,
     description,
     color,
+    category,
     creationDate,
     creationTime,
     creationDay,
@@ -37,7 +39,7 @@ export const NoteCard: React.FC<Note> = ({
       <div
         className="card-container"
         style={{
-          backgroundImage: `repeating-linear-gradient(0deg, #fafafa, #fafafa 1px, ${color} 1px, ${color})`,
+          backgroundColor: color,
         }}
       >
         <div className="content-section">

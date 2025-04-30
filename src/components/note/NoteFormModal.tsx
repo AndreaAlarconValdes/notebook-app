@@ -1,7 +1,7 @@
 import "./NoteFormModal.css";
 import { useContext, useEffect, useState } from "react";
 import { NoteContext } from "../../context/NoteContext";
-import { Note, NoteColors } from "../../types/note";
+import { CategoryColors, Note, NoteCategory } from "../../types/note";
 
 interface NoteFormModalProps {
   closeModal: () => void;
@@ -13,20 +13,20 @@ export function NoteFormModal({ closeModal, note = null }: NoteFormModalProps) {
   const [creationDate, setCreationDate] = useState("");
   const [creationTime, setCreationTime] = useState("");
   const [creationDay, setCreationDay] = useState("");
-  const [color, setColor] = useState<NoteColors>(NoteColors.green);
+  const [category, setCategory] = useState<NoteCategory>("others");
+
+  const [color, setColor] = useState<string>(CategoryColors["others"]);
   const { createNote, updateNote, deleteNote } = useContext(NoteContext);
 
-  const [isVisible, setIsVisible] = useState(false);
-  const [isShrinking, setIsShrinking] = useState(false);
-
   useEffect(() => {
-    setTimeout(() => setIsVisible(true), 10); // activa la animación
-  }, []);
+    setColor(CategoryColors[category]);
+  }, [category]);
 
   useEffect(() => {
     if (note) {
       setTitle(note.title);
       setDescription(note.description);
+      setCategory(note.category);
       setColor(note.color);
       setCreationDate(note.creationDate);
       setCreationTime(note.creationTime);
@@ -34,7 +34,8 @@ export function NoteFormModal({ closeModal, note = null }: NoteFormModalProps) {
     } else {
       setTitle("");
       setDescription("");
-      setColor(NoteColors.green);
+      setCategory("important");
+      setColor(CategoryColors["important"]);
       setCreationDate("");
       setCreationTime("");
       setCreationDay("");
@@ -48,14 +49,14 @@ export function NoteFormModal({ closeModal, note = null }: NoteFormModalProps) {
       return;
     }
 
-    setIsShrinking(true);
     setTimeout(() => {
       if (note) {
         updateNote({
           ...note,
           title,
           description,
-          color,
+          category,
+          color: CategoryColors[category],
           creationDate,
           creationTime,
           creationDay,
@@ -68,6 +69,7 @@ export function NoteFormModal({ closeModal, note = null }: NoteFormModalProps) {
           creationDate,
           creationTime,
           creationDay,
+          category,
         });
       }
       setTitle("");
@@ -75,72 +77,84 @@ export function NoteFormModal({ closeModal, note = null }: NoteFormModalProps) {
       setCreationDate("");
       setCreationTime("");
       setCreationDay("");
+
       closeModal();
     }, 400);
   };
+  const categoryColors: Record<NoteCategory, string> = {
+    important: "#f4d79a",
+    ideas: "#8cd5cb",
+    reminder: "#f4a89e",
+    pending: "#84daf6",
+    others: "#d59ef6",
+  };
 
-  //   setTitle("");
-  //   setDescription("");
-  //   setCreationDate("");
-  //   setCreationTime("");
-  //   setCreationDay("");
-  //   closeModal();
-  // }
+  const categories: NoteCategory[] = [
+    "important",
+    "reminder",
+    "ideas",
+    "pending",
+    "others",
+  ];
 
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={closeModal}>
       <form
-        className={`form ${isVisible ? "show" : ""} ${
-          isShrinking ? "shrink-out" : ""
-        }`}
+        className="form"
         onSubmit={handleSubmit}
+        onClick={(e) => e.stopPropagation()}
       >
-        <span
-          className="material-symbols-outlined close-button"
-          onClick={closeModal}
-        >
-          close
-        </span>
-        <header>
-          <h3>{note ? "Edit note" : "Create new note"}</h3>
-          <h5>
-            {note
-              ? "Edit your note details."
-              : "Customize and create your note."}
-          </h5>
-        </header>
-        <p>Title</p>
-        <input
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-          autoFocus
-        />
-        <p>Description</p>
+        <div className="header">
+          <span
+            className="material-symbols-outlined close-btn"
+            onClick={closeModal}
+          >
+            chevron_left
+          </span>
+          <input
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+            autoFocus
+            placeholder="Title"
+          />
+        </div>
+        <div className="filters">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => setCategory(cat)}
+              style={{
+                backgroundColor: categoryColors[cat],
+                transform: category === cat ? "scale(1.1)" : "scale(1)",
+              }}
+            >
+              {cat.charAt(0).toUpperCase() + cat.slice(1)}
+            </button>
+          ))}
+        </div>
+
         <textarea
+          placeholder="Description"
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
             setDescription(e.target.value)
           }
           value={description}
         ></textarea>
-        <p>Pick a color</p>
-        <div className="color-buttons">
-          {Object.values(NoteColors).map((colorValue) => (
-            <button
-              key={colorValue}
-              type="button"
-              className={`color-button ${color === colorValue ? "active" : ""}`}
-              style={{ backgroundColor: colorValue }}
-              onClick={() => setColor(colorValue as NoteColors)}
-            ></button>
-          ))}
-        </div>
         {note && (
           <p>
             {creationDay} {creationDate} - {creationTime}
           </p>
         )}
         <footer>
-          {note && <button onClick={() => deleteNote(note.id)}>Delete</button>}
+          {note && (
+            <button
+              onClick={() => deleteNote(note.id)}
+              style={{ backgroundColor: "#ff5959" }}
+            >
+              Delete
+            </button>
+          )}
           <button type="submit">{note ? "Save changes" : "Create note"}</button>
         </footer>
       </form>
