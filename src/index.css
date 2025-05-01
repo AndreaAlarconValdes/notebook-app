@@ -7,10 +7,12 @@ html, body {
 button{
   cursor: pointer;
   color: black;
+  -webkit-color: black;
 }
 
 span {
   color: black;
+  -webkit-color: black;
 
 }
 
