@@ -6,8 +6,13 @@ html, body {
 
 button{
   cursor: pointer;
+  color: black;
 }
 
+span {
+  color: black;
+
+}
 
 @keyframes scale-up {
   from{
