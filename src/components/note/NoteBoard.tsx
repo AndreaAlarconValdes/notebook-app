@@ -43,10 +43,13 @@ export function NoteBoard() {
     <>
       <div className="notes-page">
         <div className="button-section">
+          <div className="title-section">
           <h1>All in order, all in notes. </h1>
-
+<p>Organize your ideas, tasks and reminders in one place. Keep everything at your fingertips, clear and accessible, so nothing important slips through the cracks.</p>
+</div>
           <button onClick={openModal}>
             <span className="material-symbols-outlined add-symbol">add</span>
+            <p>Add New Note</p>
           </button>
         </div>
         <div className="notes-container">
