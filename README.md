@@ -4,9 +4,8 @@
 <img src="/public/readme-img.png" alt="Image"/>
 
 This is a web project of a notes application where users can create, edit and delete notes. It is built with React and TypeScript using the Vite rapid development environment. The project is designed to practice modern React development tools, state handling, and integration with TypeScript for a more robust development experience.
-<a href="https://andreaalarconvaldes.github.io/notebook-app/" target="_blank">
-<p>Click here to go to the project's website.</p>
-</a>
+
+[Click here to go to the project's website.](https://andreaalarconvaldes.github.io/notebook-app/)
 
 ## Features:
 
