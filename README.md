@@ -28,13 +28,13 @@ npm -v
 ## 1. Clone the repository
 
 ```js
-git clone https://github.com/AndreaAlarconValdes/notebook-app.git
+git clone https://github.com/AndreaAlarconValdes/notes-app.git
 ```
 
 ## 2. Install dependencies
 
 ```js
-cd  notebook-app 
+cd  notes-app 
 npm install
 ```
 
